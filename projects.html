@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Altman - Projects & Ventures</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #94a3b8;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+        }
+        
+        .project-description {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .project-link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .project-link:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .investments {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .investments h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .investments p {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .investment-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            flex: 1;
+            min-width: 200px;
+            background-color: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .notable-companies {
+            margin-top: 2rem;
+        }
+        
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        
+        .company-pill {
+            background-color: var(--light);
+            padding: 0.75rem 1rem;
+            border-radius: 50px;
+            text-align: center;
+            font-weight: 500;
+            color: var(--secondary);
+            transition: var(--transition);
+        }
+        
+        .company-pill:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .investment-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">Sam Altman</a>
+            <div class="nav-links" id="navLinks">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#" class="active">Projects</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <h1>Projects & Ventures</h1>
+            <p class="subtitle">Exploring the future through technology, innovation, and strategic investments.</p>
+        </section>
+        
+        <section class="projects-grid">
+            <div class="project-card">
+                <div class="card-content">
+                    <h2 class="project-title">OpenAI</h2>
+                    <p class="project-description">CEO of the AI research and deployment company known for creating ChatGPT and DALL-E.</p>
+                    <a href="https://openai.com" target="_blank" class="project-link">Visit Website</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-content">
+                    <h2 class="project-title">Y Combinator</h2>
+                    <p class="project-description">Former president of the startup accelerator that helped launch companies like Airbnb, Dropbox, and Stripe.</p>
+                    <a href="https://www.ycombinator.com" target="_blank" class="project-link">Visit Website</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-content">
+                    <h2 class="project-title">Helion Energy</h2>
+                    <p class="project-description">Chairman of the board for this company focused on developing nuclear fusion.</p>
+                    <a href="https://www.helion.com" target="_blank" class="project-link">Visit Website</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-content">
+                    <h2 class="project-title">Oklo Inc.</h2>
+                    <p class="project-description">Former chairman of this nuclear fission company.</p>
+                    <a href="https://oklo.com" target="_blank" class="project-link">Visit Website</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-content">
+                    <h2 class="project-title">Worldcoin</h2>
+                    <p class="project-description">Co-founder of the project aiming to create a digital identity verification system.</p>
+                    <a href="https://worldcoin.org" target="_blank" class="project-link">Visit Website</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-content">
+                    <h2 class="project-title">Loopt</h2>
+                    <p class="project-description">Co-founder of this early mobile social networking service, which was acquired in 2012.</p>
+                    <span class="project-link" style="background-color: var(--secondary);">Acquired</span>
+                </div>
+            </div>
+        </section>
+        
+        <section class="investments">
+            <h2>Investment Portfolio</h2>
+            <p>Throughout his career, Sam has been an active investor in promising startups and innovative technologies, helping shape the future of various industries.</p>
+            
+            <div class="investment-stats">
+                <div class="stat-card">
+                    <div class="stat-number">400+</div>
+                    <div class="stat-label">Companies Invested</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">Unicorn Companies</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Years of Investing</div>
+                </div>
+            </div>
+            
+            <div class="notable-companies">
+                <h3>Notable Investments</h3>
+                <div class="companies-grid">
+                    <div class="company-pill">Airbnb</div>
+                    <div class="company-pill">Stripe</div>
+                    <div class="company-pill">Reddit</div>
+                    <div class="company-pill">Neuralink</div>
+                    <div class="company-pill">Instacart</div>
+                    <div class="company-pill">Coinbase</div>
+                    <div class="company-pill">DoorDash</div>
+                    <div class="company-pill">Notion</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Projects</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+            </div>
+            <p class="copyright">© 2023 Sam Altman. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('nav')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+            
+            // Animation for stats on scroll
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateStats();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            if (statNumbers.length > 0) {
+                observer.observe(document.querySelector('.investment-stats'));
+            }
+            
+            function animateStats() {
+                statNumbers.forEach(stat => {
+                    const target = parseInt(stat.textContent);
+                    let count = 0;
+                    const duration = 2000; // 2 seconds
+                    const interval = 50; // update every 50ms
+                    const steps = duration / interval;
+                    const increment = target / steps;
+                    
+                    const counter = setInterval(() => {
+                        count += increment;
+                        if (count >= target) {
+                            stat.textContent = target + '+';
+                            clearInterval(counter);
+                        } else {
+                            stat.textContent = Math.floor(count) + '+';
+                        }
+                    }, interval);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
