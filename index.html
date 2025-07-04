@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Altman - Personal Website</title>
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #004080;
+            --accent-color: #ff6600;
+            --text-color: #333333;
+            --light-color: #ffffff;
+            --bg-color: #f8f9fa;
+            --gray-color: #6c757d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--light-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 30px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .hero-text p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--gray-color);
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.03);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 15px;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .about {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 30px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .about-stats {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .stat-box {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: calc(50% - 10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-box h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .stat-box p {
+            color: var(--gray-color);
+        }
+
+        .expertise {
+            padding: 100px 0;
+            background-color: var(--light-color);
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .expertise-card {
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .expertise-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .expertise-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .expertise-card p {
+            color: var(--gray-color);
+        }
+
+        .chart-container {
+            margin-top: 40px;
+            height: 300px;
+            position: relative;
+        }
+
+        .chart-bar {
+            position: absolute;
+            bottom: 0;
+            width: 60px;
+            background-color: var(--primary-color);
+            border-radius: 5px 5px 0 0;
+            transition: height 1s ease;
+        }
+
+        .chart-label {
+            position: absolute;
+            bottom: -30px;
+            width: 60px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--gray-color);
+        }
+
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--light-color);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background-color: #333;
+            color: var(--light-color);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-icons {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #ccc;
+        }
+
+        @media screen and (max-width: 768px) {
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                margin-top: 30px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text p {
+                font-size: 1.2rem;
+            }
+
+            .hero-image {
+                margin-bottom: 30px;
+            }
+
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 70px;
+                background-color: var(--light-color);
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                transform: translateY(-150%);
+                transition: transform 0.5s ease;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .stat-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Sam Altman</a>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#expertise">Expertise</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Sam Altman</h1>
+                    <p>Building the future of intelligence</p>
+                    <div class="hero-buttons">
+                        <a href="#about" class="btn">Learn More</a>
+                        <a href="#contact" class="btn btn-outline">Connect</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://img-cdn.inc.com/image/upload/f_webp,q_auto,c_fit/vip/2025/01/sam-altman-inc.jpg" alt="Sam Altman">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Sam</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Sam Altman is a visionary entrepreneur, investor, and technology leader who has played a pivotal role in shaping the future of artificial intelligence and startup ecosystems globally.</p>
+                    <p>As the CEO of OpenAI, Sam leads one of the world's premier AI research laboratories focused on ensuring that artificial general intelligence benefits all of humanity. Prior to OpenAI, Sam served as the president of Y Combinator, where he helped launch and mentor thousands of startups that have collectively shaped the modern technology landscape.</p>
+                    <p>Throughout his career, Sam has demonstrated an unwavering commitment to fostering innovation, supporting entrepreneurs, and addressing the most pressing technological challenges of our time. His unique perspective on AI safety, technological progress, and the future of humanity has made him one of the most influential voices in technology today.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <h3>OpenAI</h3>
+                            <p>CEO & Co-founder</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>Y Combinator</h3>
+                            <p>Former President</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>Loopt</h3>
+                            <p>Co-founder</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>Worldcoin</h3>
+                            <p>Co-founder</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise" class="expertise">
+        <div class="container">
+            <div class="section-title">
+                <h2>Areas of Expertise</h2>
+            </div>
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Artificial Intelligence</h3>
+                    <p>Leading the development of safe and beneficial artificial general intelligence at OpenAI, focusing on ensuring AI systems that benefit all of humanity.</p>
+                </div>
+                <div class="expertise-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Entrepreneurship</h3>
+                    <p>Extensive experience in founding and scaling startups, as well as mentoring thousands of entrepreneurs through Y Combinator.</p>
+                </div>
+                <div class="expertise-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Technology Investment</h3>
+                    <p>Strategic investor in numerous technology companies, with a keen eye for identifying transformative technologies and business models.</p>
+                </div>
+            </div>
+            <div class="chart-container">
+                <div class="chart-bar" style="left: 50px; height: 0%;" data-height="85%">
+                    <div class="chart-label">AI</div>
+                </div>
+                <div class="chart-bar" style="left: 150px; height: 0%;" data-height="75%">
+                    <div class="chart-label">Startups</div>
+                </div>
+                <div class="chart-bar" style="left: 250px; height: 0%;" data-height="80%">
+                    <div class="chart-label">Investment</div>
+                </div>
+                <div class="chart-bar" style="left: 350px; height: 0%;" data-height="70%">
+                    <div class="chart-label">Leadership</div>
+                </div>
+                <div class="chart-bar" style="left: 450px; height: 0%;" data-height="90%">
+                    <div class="chart-label">Innovation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Let's Connect</h2>
+            <p>Interested in discussing AI, entrepreneurship, or the future of technology? Reach out to connect with Sam.</p>
+            <a href="#contact" class="btn">Get in Touch</a>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: contact@samaltman.com</p>
+                    <p>San Francisco, California</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#about">About</a>
+                    <a href="#expertise">Expertise</a>
+                    <a href="https://blog.samaltman.com" target="_blank">Blog</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Subscribe</h3>
+                    <p>Stay updated with Sam's latest thoughts and projects.</p>
+                    <form>
+                        <input type="email" placeholder="Your email" style="padding: 10px; width: 100%; margin-bottom: 10px; border-radius: 5px; border: none;">
+                        <button type="submit" class="btn" style="width: 100%;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Sam Altman. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Animate chart bars on scroll
+        function animateChartBars() {
+            const chartBars = document.querySelectorAll('.chart-bar');
+            chartBars.forEach(bar => {
+                const height = bar.getAttribute('data-height');
+                bar.style.height = height;
+            });
+        }
+
+        // Check if element is in viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        // Animate elements when they come into view
+        function handleScrollAnimations() {
+            const chartContainer = document.querySelector('.chart-container');
+            if (isInViewport(chartContainer)) {
+                animateChartBars();
+                // Remove the scroll listener once animation is triggered
+                window.removeEventListener('scroll', handleScrollAnimations);
+            }
+        }
+
+        // Add scroll listener for animations
+        window.addEventListener('scroll', handleScrollAnimations);
+        
+        // Check on initial load as well
+        window.addEventListener('load', handleScrollAnimations);
+    </script>
+</body>
+</html>
