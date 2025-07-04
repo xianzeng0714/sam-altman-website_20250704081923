@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Altman - Insights & Blog</title>
+    <style>
+        :root {
+            --primary: #0066cc;
+            --secondary: #f8f9fa;
+            --dark: #212529;
+            --light: #ffffff;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        body {
+            background-color: var(--secondary);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+            background-color: var(--light);
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background-color: var(--light);
+            border: 1px solid var(--light-gray);
+            color: var(--dark);
+            padding: 10px 20px;
+            margin: 0 10px 10px 0;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: var(--light);
+            border-color: var(--primary);
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .blog-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-img {
+            height: 200px;
+            background-color: var(--light-gray);
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .card-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-category {
+            display: inline-block;
+            background-color: var(--light-gray);
+            color: var(--gray);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .card-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .card-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .card-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+        
+        .card-link:hover {
+            color: #004c99;
+        }
+        
+        .card-link span {
+            margin-left: 5px;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            margin: 0 15px;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-text {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                margin-top: 20px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <img src="https://via.placeholder.com/40" alt="Sam Altman">
+                    Sam Altman
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Insights</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="mobile-menu">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Insights & Blog</h1>
+            <p>Explore my thoughts, interviews, and articles on AI, technology, and the future of innovation.</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="interviews">Interviews</button>
+            <button class="filter-btn" data-filter="articles">Articles</button>
+            <button class="filter-btn" data-filter="news">News & Opinion</button>
+        </div>
+
+        <div class="blog-grid" id="blogGrid">
+            <!-- Content will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i>𝕏</i></a>
+                <a href="#"><i>in</i></a>
+                <a href="#"><i>f</i></a>
+                <a href="#"><i>📷</i></a>
+            </div>
+            <p class="footer-text">© 2025 Sam Altman. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Blog data
+        const blogData = [
+            {
+                title: 'OpenAI CEO on AI Governance, Ethics, and Innovation (2024)',
+                description: 'A conversation with Harvard Business School about AI ethics, governance, breakthroughs, and the role of AI in accelerating scientific discovery.',
+                category: 'interviews',
+                link: 'https://www.youtube.com/watch?v=your-video-id',
+                image: 'https://via.placeholder.com/350x200?text=AI+Governance'
+            },
+            {
+                title: 'How To Build The Future: Sam Altman (2024)',
+                description: 'Altman discusses the origins of OpenAI, what\'s next for the company, and advice for founders.',
+                category: 'interviews',
+                link: 'https://www.youtube.com/watch?v=your-video-id',
+                image: 'https://via.placeholder.com/350x200?text=Building+Future'
+            },
+            {
+                title: 'The Circuit with Emily Chang (2025)',
+                description: 'Discussion on OpenAI\'s Stargate data center project, product roadmap, ambitions, and humanoid robots.',
+                category: 'interviews',
+                link: 'https://www.youtube.com/watch?v=your-video-id',
+                image: 'https://via.placeholder.com/350x200?text=The+Circuit'
+            },
+            {
+                title: 'An Interview with OpenAI CEO Sam Altman About Building a Consumer Tech Company (2025)',
+                description: 'Altman discusses his motivation for starting OpenAI, the development of ChatGPT and the challenges of running OpenAI.',
+                category: 'interviews',
+                link: 'https://stratechery.com/2025/an-interview-with-openai-ceo-sam-altman-about-building-a-consumer-tech-company/',
+                image: 'https://via.placeholder.com/350x200?text=Consumer+Tech'
+            },
+            {
+                title: 'TED Interview (2025)',
+                description: 'Sam Altman and Adam Grant discuss the balance between technological advances and human adaptation.',
+                category: 'interviews',
+                link: 'https://www.ted.com/talks/your-talk-link',
+                image: 'https://via.placeholder.com/350x200?text=TED+Talk'
+            },
+            {
+                title: 'Moore\'s Law for Everything (2021)',
+                description: 'Altman discusses the socioeconomic changes coming with AI, the potential shift of power from labor to capital, and the need for policy changes.',
+                category: 'articles',
+                link: 'https://samaltman.com/moores-law-for-everything',
+                image: 'https://via.placeholder.com/350x200?text=Moore\'s+Law'
+            },
+            {
+                title: 'The Gentle Singularity (2025)',
+                description: 'Altman expresses his confidence that humanity is close to building digital superintelligence.',
+                category: 'articles',
+                link: 'https://samaltman.com/the-gentle-singularity',
+                image: 'https://via.placeholder.com/350x200?text=Gentle+Singularity'
+            },
+            {
+                title: 'TIME - How OpenAI\'s Sam Altman Is Thinking About AGI and Superintelligence in 2025',
+                description: 'Altman reflects on AI progress and predicts AI agents may enter the workforce in 2025.',
+                category: 'news',
+                link: 'https://time.com/your-article-link/',
+                image: 'https://via.placeholder.com/350x200?text=TIME+Magazine'
+            },
+            {
+                title: 'Mashable - Sam Altman\'s outrageous \'Singularity\' blog perfectly sums up AI in 2025',
+                description: 'The article discusses Altman\'s blog post "The Gentle Singularity" and its claims about the progress of AI.',
+                category: 'news',
+                link: 'https://mashable.com/your-article-link/',
+                image: 'https://via.placeholder.com/350x200?text=Mashable'
+            },
+            {
+                title: 'The Hindu - OpenAI Sam Altman launches new startup World (2025)',
+                description: 'Altman launched a new startup called World, focused on authenticating human identity online using eye scans.',
+                category: 'news',
+                link: 'https://www.thehindu.com/your-article-link/',
+                image: 'https://via.placeholder.com/350x200?text=The+Hindu'
+            }
+        ];
+
+        // DOM elements
+        const blogGrid = document.getElementById('blogGrid');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const mobileMenuButton = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        // Mobile menu toggle
+        mobileMenuButton.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Filter functionality
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-filter');
+                
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Filter blog posts
+                displayBlogPosts(filter);
+            });
+        });
+
+        // Display blog posts based on filter
+        function displayBlogPosts(filter = 'all') {
+            blogGrid.innerHTML = '';
+            
+            const filteredPosts = filter === 'all' 
+                ? blogData 
+                : blogData.filter(post => post.category === filter);
+            
+            filteredPosts.forEach(post => {
+                const card = document.createElement('div');
+                card.className = 'blog-card';
+                
+                card.innerHTML = `
+                    <div class="card-img" style="background-image: url('${post.image}')"></div>
+                    <div class="card-content">
+                        <span class="card-category">${post.category}</span>
+                        <h3 class="card-title">${post.title}</h3>
+                        <p class="card-description">${post.description}</p>
+                        <a href="${post.link}" class="card-link" target="_blank">Read More <span>→</span></a>
+                    </div>
+                `;
+                
+                blogGrid.appendChild(card);
+            });
+        }
+
+        // Initial display
+        displayBlogPosts();
+    </script>
+</body>
+</html>
