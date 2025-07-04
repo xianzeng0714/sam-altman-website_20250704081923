@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media & Press | Sam Altman</title>
+    <style>
+        :root {
+            --primary: #0066cc;
+            --secondary: #333;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --accent: #17a2b8;
+            --success: #28a745;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .active {
+            color: var(--primary) !important;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--secondary);
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .hero {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+        
+        .press-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .press-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .press-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .press-content {
+            padding: 20px;
+        }
+        
+        .press-source {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .press-description {
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .press-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .press-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        
+        .media-kit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .media-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .media-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .media-item:hover .media-img {
+            transform: scale(1.05);
+        }
+        
+        .download-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .download-btn:hover {
+            background-color: #0055aa;
+        }
+        
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 40px 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copyright {
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .social-links li {
+            margin-left: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+        }
+        
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .filter-btn {
+            background-color: white;
+            border: 1px solid var(--gray);
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                padding: 20px 0;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .press-grid, .media-kit-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .social-links {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            .social-links li:first-child {
+                margin-left: 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Sam Altman</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                    <li><a href="media.html" class="active">Media</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Media & Press</h1>
+            <p>Explore interviews, articles, and media resources featuring Sam Altman's insights on AI, technology, and innovation.</p>
+        </div>
+    </section>
+
+    <section id="press-mentions">
+        <div class="container">
+            <h2 class="section-title">Press Mentions & Interviews</h2>
+            
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="interview">Interviews</button>
+                <button class="filter-btn" data-filter="article">Articles</button>
+            </div>
+            
+            <div class="press-grid">
+                <div class="press-card" data-type="article">
+                    <div class="press-content">
+                        <div class="press-source">TIME</div>
+                        <p class="press-description">How OpenAI's Sam Altman Is Thinking About AGI and Superintelligence in 2025</p>
+                        <a href="#" class="press-link">Read Article →</a>
+                    </div>
+                </div>
+                
+                <div class="press-card" data-type="article">
+                    <div class="press-content">
+                        <div class="press-source">Mashable</div>
+                        <p class="press-description">Sam Altman's outrageous 'Singularity' blog perfectly sums up AI in 2025</p>
+                        <a href="#" class="press-link">Read Article →</a>
+                    </div>
+                </div>
+                
+                <div class="press-card" data-type="article">
+                    <div class="press-content">
+                        <div class="press-source">The Hindu</div>
+                        <p class="press-description">OpenAI Sam Altman launches new startup World (2025)</p>
+                        <a href="#" class="press-link">Read Article →</a>
+                    </div>
+                </div>
+                
+                <div class="press-card" data-type="interview">
+                    <div class="press-content">
+                        <div class="press-source">Harvard Business School</div>
+                        <p class="press-description">OpenAI CEO on AI Governance, Ethics, and Innovation (2024)</p>
+                        <a href="#" class="press-link">Watch Interview →</a>
+                    </div>
+                </div>
+                
+                <div class="press-card" data-type="interview">
+                    <div class="press-content">
+                        <div class="press-source">Stratechery</div>
+                        <p class="press-description">An Interview with OpenAI CEO Sam Altman About Building a Consumer Tech Company (2025)</p>
+                        <a href="#" class="press-link">Read Interview →</a>
+                    </div>
+                </div>
+                
+                <div class="press-card" data-type="interview">
+                    <div class="press-content">
+                        <div class="press-source">TED</div>
+                        <p class="press-description">TED Interview (2025) with Adam Grant on the future of AI and human collaboration</p>
+                        <a href="#" class="press-link">Watch Interview →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="media-kit">
+        <div class="container">
+            <h2 class="section-title">Media Kit</h2>
+            <p style="text-align: center; margin-bottom: 30px;">High-resolution images available for media use. Click the download button to get the full-size image.</p>
+            
+            <div class="media-kit-grid">
+                <div class="media-item">
+                    <img src="https://img-cdn.inc.com/image/upload/f_webp,q_auto,c_fit/vip/2025/01/sam-altman-inc.jpg" alt="Sam Altman" class="media-img">
+                    <button class="download-btn">Download</button>
+                </div>
+                
+                <div class="media-item">
+                    <img src="https://talkstar-assets.s3.amazonaws.com/production/talks/talk_148296/aeb01208-f655-4992-accb-5b3c340b80c5/SamAltman_2025-stageshot.jpg" alt="Sam Altman TED Talk" class="media-img">
+                    <button class="download-btn">Download</button>
+                </div>
+                
+                <div class="media-item">
+                    <img src="https://placeholder.pics/svg/300x300/DEDEDE/555555/Sam%20Altman%20Portrait" alt="Sam Altman Portrait" class="media-img">
+                    <button class="download-btn">Download</button>
+                </div>
+                
+                <div class="media-item">
+                    <img src="https://placeholder.pics/svg/300x300/DEDEDE/555555/Sam%20Altman%20OpenAI" alt="Sam Altman at OpenAI" class="media-img">
+                    <button class="download-btn">Download</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <p class="copyright">© 2025 Sam Altman. All rights reserved.</p>
+                </div>
+                <ul class="social-links">
+                    <li><a href="#"><i class="fab fa-twitter">T</i></a></li>
+                    <li><a href="#"><i class="fab fa-linkedin">L</i></a></li>
+                    <li><a href="#"><i class="fab fa-github">G</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.querySelector(".nav-links");
+        
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navLinks.classList.toggle("active");
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll(".nav-links a").forEach(link => {
+            link.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                navLinks.classList.remove("active");
+            });
+        });
+        
+        // Filter functionality for press mentions
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        const pressCards = document.querySelectorAll(".press-card");
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove("active"));
+                
+                // Add active class to clicked button
+                btn.classList.add("active");
+                
+                const filter = btn.getAttribute("data-filter");
+                
+                // Show/hide cards based on filter
+                pressCards.forEach(card => {
+                    if (filter === "all" || card.getAttribute("data-type") === filter) {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            });
+        });
+        
+        // Download functionality for media kit images
+        const downloadBtns = document.querySelectorAll(".download-btn");
+        
+        downloadBtns.forEach(btn => {
+            btn.addEventListener("click", function() {
+                const imgSrc = this.previousElementSibling.src;
+                const link = document.createElement("a");
+                link.href = imgSrc;
+                link.download = "sam-altman-" + Date.now() + ".jpg";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        });
+    </script>
+</body>
+</html>
